@@ -1,4 +1,4 @@
-1.
-2.
-3.
-4.
+1. find . keyword
+2. ps
+3. kill pid
+4. diff file1 file2
