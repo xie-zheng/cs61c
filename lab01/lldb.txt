@@ -1,0 +1,9 @@
+1. process launch -- <args>
+2. breakpoint set <-option arg>
+3. thread step-over
+4. thread step-in
+5. thread continue
+6. frame variable arg / p arg
+7. display arg /  target stop-hook add --one-liner "frame variable argc argv"
+8. frame variable
+9. q / quit
