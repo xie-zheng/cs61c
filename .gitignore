@@ -252,3 +252,10 @@ $RECYCLE.BIN/
 # lab13 program
 server_basic server_process
 **/*._sobel.bmp
+
+# proj1
+proj1/testOutputs/**/*
+proj1/studentOutputs/**/*
+
+# vscode
+**/.vscode/
