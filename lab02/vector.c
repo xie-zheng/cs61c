@@ -1,6 +1,7 @@
 /* Include the system headers we need */
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 /* Include our header */
 #include "vector.h"
@@ -138,7 +139,11 @@ void vector_set(vector_t *v, size_t loc, int value)
         return;
     }
 
-    v->data = (int *)realloc(v->data, sizeof(int) * (loc + 1));
+    int *new_data = (int *)malloc(sizeof(int) * (loc + 1));
+    memset(new_data, 0, sizeof(int) * (loc + 1));
+    memcpy(new_data, v->data, sizeof(int) * v->size);
+    free(v->data);
+    v->data = new_data;
     v->size = loc + 1;
     if (v->data == NULL)
     {
