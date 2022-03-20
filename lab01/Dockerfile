@@ -1,7 +1,6 @@
 FROM ubuntu
-WORKDIR lab01
-COPY . .
+WORKDIR code
 ADD source.list /etc/apt/
 RUN apt-get update -y
-RUN apt-get install valgrind -y
+RUN apt-get install valgrind gcc make -y
 
