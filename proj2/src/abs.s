@@ -12,6 +12,7 @@ abs:
     # Prologue
 
     # return 0
+    ebreak
     mv a0, zero
 
     # Epilogue
