@@ -21,4 +21,14 @@ main:
     ecall # Exit
 
 factorial:
-    # YOUR CODE HERE
+    # n in a0
+    # result in a0?
+    addi a2, x0, 1     
+loop:
+    beq a0, x0, finish
+    mul a2, a2, a0
+    addi a0, a0, -1
+    j loop
+finish:
+    addi a0, a2, 0
+    jr ra
