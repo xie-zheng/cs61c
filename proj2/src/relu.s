@@ -14,25 +14,40 @@
 # ==============================================================================
 relu:
     # Prologue
+	addi sp, sp, -12
+    sw s0, 0(sp)
+    sw s1, 4(sp)
+    sw s2, 8(sp)
 
-
-loop_start:
+	add s0, x0, x0
+	ble a1, s0, loop_error 
     
-
-
-
-
-
-
+loop_start:
+	ble a1, s0, loop_end
+    
+    # load #th element
+    slli s1, s0, 2 # get the byte shift
+    add s2, a0, s1
+    lw s1, 0(s2)
+    
+    bge s1, x0, loop_continue
+	sw x0, 0(s2)
 
 loop_continue:
+	addi s0, s0, 1
+    j loop_start
 
-
+loop_error:
+    addi a0, x0, 78
 
 loop_end:
-
-
     # Epilogue
+	lw s0, 0(sp)
+	lw s1, 4(sp)
+	lw s2, 8(sp)
+    addi sp, sp, 12
+        
+	ret
+    
 
     
-	ret
