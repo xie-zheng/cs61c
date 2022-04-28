@@ -110,17 +110,55 @@ class TestDot(TestCase):
     def test_simple(self):
         t = AssemblyTest(self, "dot.s")
         # create arrays in the data section
-        raise NotImplementedError("TODO")
-        # TODO
+        v0 = t.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        v1 = t.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
         # load array addresses into argument registers
-        # TODO
+        t.input_array("a0", v0)
+        t.input_array("a1", v1)
         # load array attributes into argument registers
-        # TODO
+        t.input_scalar("a2", 9)
+        t.input_scalar("a3", 1)
+        t.input_scalar("a4", 1)
         # call the `dot` function
         t.call("dot")
         # check the return value
-        # TODO
+        t.check_scalar("a0", 285)
         t.execute()
+
+    def test_length_error(self):
+        t = AssemblyTest(self, "dot.s")
+        v0 = t.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        v1 = t.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        # load array addresses into argument registers
+        t.input_array("a0", v0)
+        t.input_array("a1", v1)
+        # load array attributes into argument registers
+        t.input_scalar("a2", 0)
+        t.input_scalar("a3", 1)
+        t.input_scalar("a4", 1)
+        # call the `dot` function
+        t.call("dot")
+        # check the return value
+        t.check_scalar("a0", 75)
+        t.execute()
+
+    def test_stride_error(self):
+        t = AssemblyTest(self, "dot.s")
+        v0 = t.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        v1 = t.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        # load array addresses into argument registers
+        t.input_array("a0", v0)
+        t.input_array("a1", v1)
+        # load array attributes into argument registers
+        t.input_scalar("a2", 9)
+        t.input_scalar("a3", 0)
+        t.input_scalar("a4", 1)
+        # call the `dot` function
+        t.call("dot")
+        # check the return value
+        t.check_scalar("a0", 76)
+        t.execute()
+
 
     @classmethod
     def tearDownClass(cls):
