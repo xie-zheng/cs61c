@@ -15,6 +15,7 @@
 #   this function terminates the program with error code 77.
 # =================================================================
 argmax:
+    bge x0, a1, error
     # Prologue
 	addi sp, sp, -20
     sw s0, 0(sp)
@@ -22,8 +23,7 @@ argmax:
     sw s2, 8(sp)
 	sw s3, 12(sp)
     sw s4, 16(sp)
-
-	bge x0, a1, error
+    #	
 	add s0, x0, x0
     lw s3, 0(a0)
     add s4, s0, x0
@@ -44,15 +44,8 @@ loop_continue:
 	j loop_start
 
 error:
-	li a0, 77
-    
-    lw s0, 0(sp)
-    lw s1, 4(sp)
-    lw s2, 8(sp)
-	lw s3, 12(sp)
-    lw s4, 16(sp)
-	addi, sp, sp, 20
-    ret
+	li a1, 77
+    j exit2
     
 loop_end:
     

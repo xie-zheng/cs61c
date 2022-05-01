@@ -13,14 +13,14 @@
 #   this function terminates the program with error code 78.
 # ==============================================================================
 relu:
+	ble a1, x0, loop_error     
     # Prologue
 	addi sp, sp, -12
     sw s0, 0(sp)
     sw s1, 4(sp)
     sw s2, 8(sp)
 
-	add s0, x0, x0
-	ble a1, s0, loop_error 
+    mv s0, x0
     
 loop_start:
 	ble a1, s0, loop_end
@@ -37,8 +37,7 @@ loop_continue:
 	addi s0, s0, 1
     j loop_start
 
-loop_error:
-    addi a0, x0, 78
+
 
 loop_end:
     # Epilogue
@@ -49,5 +48,7 @@ loop_end:
         
 	ret
     
-
+loop_error:
+    li a1, 78
+    j exit2
     
