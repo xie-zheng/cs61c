@@ -252,14 +252,15 @@ class TestReadMatrix(TestCase):
 
 class TestWriteMatrix(TestCase):
 
-    def do_write_matrix(self, fail='', code=0):
+    def do_write_matrix(self, input=[], rows=0, cols=0, fail='', code=0):
         t = AssemblyTest(self, "write_matrix.s")
         outfile = "outputs/test_write_matrix/student.bin"
         # load output file name into a0 register
         t.input_write_filename("a0", outfile)
         # load input array and other arguments
-        raise NotImplementedError("TODO")
-        # TODO
+        t.input_array("a1", t.array(input))
+        t.input_scalar("a2", rows)
+        t.input_scalar("a3", cols)
         # call `write_matrix` function
         t.call("write_matrix")
         # generate assembly and run it through venus
@@ -268,7 +269,7 @@ class TestWriteMatrix(TestCase):
         t.check_file_output(outfile, "outputs/test_write_matrix/reference.bin")
 
     def test_simple(self):
-        self.do_write_matrix()
+        self.do_write_matrix(input=[1, 2, 3, 4, 5, 6, 7, 8, 9], rows=3, cols=3)
 
     @classmethod
     def tearDownClass(cls):
@@ -293,14 +294,14 @@ class TestClassify(TestCase):
         ref_file = "outputs/test_basic_main/reference0.bin"
         args = ["inputs/simple0/bin/m0.bin", "inputs/simple0/bin/m1.bin",
                 "inputs/simple0/bin/inputs/input0.bin", out_file]
+        t.input_scalar("a2", 0)
         # call classify function
         t.call("classify")
         # generate assembly and pass program arguments directly to venus
         t.execute(args=args)
-
+        
         # compare the output file and
-        raise NotImplementedError("TODO")
-        # TODO
+        t.check_file_output(out_file, ref_file)
         # compare the classification output with `check_stdout`
 
     @classmethod
