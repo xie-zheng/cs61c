@@ -20,52 +20,36 @@
 dot:
     # check error
     li t1, 1
-    blt a2, t1, length_error
-    blt a3, t1, stride_error
-    blt a4, t1, stride_error
+    blt a2, t1, length_error # vec.len() < 1
+    blt a3, t1, stride_error # v0.stride < 1
+    blt a4, t1, stride_error # v1.stride < 1
+    
+    slli a3, a3, 2  # a3: v0.stride in bytes
+    slli a4, a4, 2  # a4: v1.stride in bytes
 
-    # Prologue
-    addi sp, sp, -24
-    sw s0, 0(sp)
-    sw s1, 4(sp)
-    sw s2, 8(sp)
-    sw s3, 12(sp)
-    sw s4, 16(sp)
-    sw s5, 20(sp)
-    # preloop
-    mv s0, a0
-    mv s1, a1
-    slli s2, a3, 2 # stride in bytes
-    slli s3, a4, 2 
-    li s4, 0       # loop counter
-    li a0, 0
+    li t0, 0        # t0: result(set to zero first)
+    li t1, 0        # t1: loop index
 
 
 loop_start:
-    bge s4, a2, loop_end
-    # get element from 2 array and multiplicate
-    lw t0, 0(s0)
-    lw t1, 0(s1)
-    mul t0, t0, t1
-    # add to result
-    add a0, a0, t0
-    # update counter and address
-    addi s4, s4, 1
-    add s0, s0, s2
-    add s1, s1, s3
+    # i < len?
+    bge t1, a2, loop_end
     
+    # t0 = v0[i] * v1[i]
+    lw t2, 0(a0)
+    lw t3, 0(a1)
+    mul t2, t2, t3
+
+    add t0, t0, t2  # dot += t0
+    
+    addi t1, t1, 1  # i += 1
+    add a0, a0, a3  # addr0 += stride0
+    add a1, a1, a4  # addr1 += stride1
     j loop_start
 
 
 loop_end:
-    # Epilogue
-    lw s0, 0(sp)
-    lw s1, 4(sp)
-    lw s2, 8(sp)
-    lw s3, 12(sp)
-    lw s4, 16(sp)
-    lw s5, 20(sp)
-    addi sp, sp, 24
+    mv a0, t0
     ret
 
 

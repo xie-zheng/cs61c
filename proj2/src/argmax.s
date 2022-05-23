@@ -15,46 +15,43 @@
 #   this function terminates the program with error code 77.
 # =================================================================
 argmax:
+    # err handling
     bge x0, a1, error
-    # Prologue
-	addi sp, sp, -20
-    sw s0, 0(sp)
-    sw s1, 4(sp)
-    sw s2, 8(sp)
-	sw s3, 12(sp)
-    sw s4, 16(sp)
-    #	
-	add s0, x0, x0
-    lw s3, 0(a0)
-    add s4, s0, x0
+    
+    #==============
+    # brefore loop
+    #==============
+    # t1: loop index	
+    # t2: value of the largest element
+    # t3: index of the largest element
+	mv t1, x0
+    lw t2, 0(a0)
+    mv t3, t1
 
 loop_start:
-	bge s0, a1, loop_end
-	
-    slli s1, s0, 2
-    add s2, s1, a0
-    lw s1, 0(s2)
-	
-    ble s1, s3, loop_continue
-    add s3, s1, x0
-    add s4, s0, x0
+    # t1 > vec.len()?
+	bge t1, a1, loop_end
+    
+    slli t0, t1, 2       # byte shift
+    add t0, t0, a0       # address of the next element
+    lw t0, 0(t0)         # get the next element
+    
+    # vec.get(i) > max?
+    ble t0, t2, loop_continue
+    
+    # set the new value and index of 'argmax'
+    mv t2, t0
+    mv t3, t1
     
 loop_continue:
-	addi s0, s0, 1
+	addi t1, t1, 1
 	j loop_start
+    
+loop_end:
+    mv a0, t3  
+    ret
+
 
 error:
 	li a1, 77
     j exit2
-    
-loop_end:
-    
-    mv a0, s4
-    # Epilogue
-   	lw s0, 0(sp)
-    lw s1, 4(sp)
-    lw s2, 8(sp)
-	lw s3, 12(sp)
-    lw s4, 16(sp)
-	addi, sp, sp, 20   
-    ret
