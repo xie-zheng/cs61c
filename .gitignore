@@ -268,5 +268,8 @@ server_basic server_process
 proj1/testOutputs/**/*
 proj1/studentOutputs/**/*
 
+# lab05
+lab05/testing/**/*
+
 # vscode
 **/.vscode/
