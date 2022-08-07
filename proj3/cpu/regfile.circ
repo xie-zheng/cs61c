@@ -291,10 +291,6 @@ end TCL_Generic;
       <a name="facing" val="south"/>
       <a name="label" val="w_en1"/>
     </comp>
-    <comp lib="0" loc="(210,760)" name="Tunnel">
-      <a name="facing" val="south"/>
-      <a name="label" val="w_en1"/>
-    </comp>
     <comp lib="0" loc="(210,960)" name="Tunnel">
       <a name="facing" val="north"/>
       <a name="label" val="w_en7"/>
