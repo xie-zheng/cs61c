@@ -1,24 +1,25 @@
 Scenario 1
-    1.
-    2.
-    3.
+    1. [Step Size] * sizeof(int) = [Block Size] * [Number of Blocks], every access cause cache block1 miss. array[0],array[8],array[0]...
+    2. 0.0 (only hit array[0] & array[8])
+    3. [Step Size] [1]
 
 Scenario 2
-    1.
-    2.
-    3.
+    1. 32
+    2. guess: MHHH real: MH
+    3. guess: 0.99 real: 0.5
 
 Scenario 3
-    1.
-    2.
-    3.
-    4.
-    5.
+    1. [L1 0.5] [L2 0.5] [Overall 0.5]
+    2. [16 of L1 accesses], [8 of L1 misses]
+    3. [16 of L2 accesses], [8 of l2 misses]
+    4. Rep Count
+    5. =,=,+,=
 
 --- lines below are ignored by the AG ---
 
-Checkoff Question 1:
-Checkoff Question 2:
-Checkoff Question 3:
-Checkoff Question 4:
-Checkoff Question 5:
+Checkoff Question 1: the program keep hitting [0] [8], which map to the same cache block.
+Checkoff Question 2: change cache block to 3, so [0] [8] map to different cache block, or increse block size
+Checkoff Question 3: 0.75
+Checkoff Question 4: array size is greater than cache size
+Checkoff Question 5: 
+Checkoff Question 6: array size is the same as cache size
