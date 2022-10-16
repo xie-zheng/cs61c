@@ -1,8 +1,8 @@
-1.
-2.
+1. jki, kji
+2. ijk, ikj -> ijk, jik
 
 --- lines below are ignored by the AG ---
 
-Checkoff Question 1:
-Checkoff Question 2:
-Checkoff Question 3:
+Checkoff Question 1: i in the inner loop can do the multiply row by the, utilize cache best
+Checkoff Question 2: almost same as quesiton 1...
+Checkoff Question 3: innermost loop better access elements in the same row.
