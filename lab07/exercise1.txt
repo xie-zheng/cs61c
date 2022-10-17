@@ -5,8 +5,8 @@ Scenario 1
 
 Scenario 2
     1. 32
-    2. guess: MHHH real: MH
-    3. guess: 0.99 real: 0.5
+    2. MHHH
+    3. 0.99
 
 Scenario 3
     1. [L1 0.5] [L2 0.5] [Overall 0.5]
