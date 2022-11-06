@@ -1,19 +1,23 @@
 Exercise 1:
-    1.
-    2.
-    3.
+    1. 8
+    2. 4, 6, 0, 6 
+    3. no, no
 
 Exercise 2:
-    1.
+    1. 00 20 40 60 80 A0 C0 E0 00 20
 
 Exercise 3:
-    1.
+    1. Physical Meomory Size
 
 --- lines below are ignored by the AG ---
 
 Exercise 1 Checkoff Questions:
-    1.
-    2.
+    1. first access is "2D", 0x0010_1011, PAGE number is 001, OFFSET is 01011
+    search page "1" in TLB -> TLB miss -> Check Page 1 in Page Table -> Page Fault
+    Allocate space in memory, set Frame Number in Page table, set Physical Page number in TLB
+    
+    2. There's only 4 physical page space, normally virtural address is always bigger than
+    physical
 
 Exercise 4 Checkoff Question:
     1.
