@@ -1,4 +1,4 @@
-CC=gcc
+CC=/opt/homebrew/opt/llvm/bin/clang
 CFLAGS= -std=gnu99 -c -fopenmp
 LDFLAGS=-fopenmp
 OBJECTS=$(SOURCES:.c=.o)
